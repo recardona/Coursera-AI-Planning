@@ -14,7 +14,10 @@ class Action():
         self.name = name
     
     def __str__(self):
-        return "Action {}".format(self.name);
+        return "Action {0}".format(self.name);
+    
+    def __hash__(self):
+        return hash(self.name)
     
     def __eq__(self, other):
         """

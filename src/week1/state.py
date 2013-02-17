@@ -16,7 +16,7 @@ class State():
     the world).
     """
     
-    def __init__(self, name, conditions = {}):
+    def __init__(self, name = "Dummy", conditions = {}):
         self.name = name
         self.conditions = conditions
         
@@ -26,7 +26,22 @@ class State():
         if(len(self.conditions) > 0):
             conditions_string = self.conditions
         
-        return "State {} with conditions: {}".format(self.name, conditions_string);
+        return "State {0} with conditions: {1}".format(self.name, conditions_string)
+        
+    def __hash__(self):
+        """
+        Defined for use in the Successor Function (@see: successor.py)
+        """
+        hash_value = hash(self.name)
+        
+        for condition_key in self.conditions.keys():
+            hash_value += hash(condition_key)
+            condition_values = self.conditions[condition_key]
+            
+            for value in condition_values:
+                hash_value += hash(value)
+        
+        return hash_value
     
     def __eq__(self, other):
         """
@@ -43,7 +58,6 @@ class State():
         
         return True
         
-    
     def __ne__(self, other):
         """
         State inequality must have inequality in the names and the conditions (if any)
