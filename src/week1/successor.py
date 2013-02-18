@@ -3,7 +3,6 @@ Created on Feb 17, 2013
 
 @author: recardona
 '''
-from sets import Set
 
 class SuccessorFunction(object):
     '''
@@ -89,8 +88,23 @@ class SuccessorFunction(object):
         pass
             
     def resolveActionInState(self, state, action):
-        pass
-
+        """
+        Returns the State that results from applying the given Action in the
+        given State.  If no such given State is mapped, or the given Action
+        cannot be applied in the given State, this method returns None. 
+        """
+        if not self.mapping.has_key(state):
+            return None
+        
+        resulting_state = None
+        existing_mappings = self.mapping[state]
+        
+        for mapping in existing_mappings:
+            if mapping[0] == action:
+                resulting_state = mapping[1]
+                
+                
+        return resulting_state
     
     
     
