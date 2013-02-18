@@ -88,7 +88,9 @@ class SuccessorFunction(object):
             
         pass
             
-    
+    def resolveActionInState(self, state, action):
+        pass
+
     
     
     
