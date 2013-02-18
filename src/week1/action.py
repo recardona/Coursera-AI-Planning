@@ -1,7 +1,7 @@
+#!/usr/bin/python
 '''
-Created on Feb 16, 2013
-
-@author: recardon
+  week1.action.py
+  @author: recardona
 '''
 
 class Action(object):

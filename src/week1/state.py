@@ -1,7 +1,7 @@
+#!/usr/bin/python
 '''
-Created on Feb 16, 2013
-
-@author: recardon
+  week1.state.py
+  @author: recardona
 '''
 
 class State(object):

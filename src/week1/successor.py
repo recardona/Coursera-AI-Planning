@@ -1,7 +1,7 @@
+#!/usr/bin/python
 '''
-Created on Feb 17, 2013
-
-@author: recardona
+  week1.successor.py
+  @author: recardona
 '''
 
 class SuccessorFunction(object):
