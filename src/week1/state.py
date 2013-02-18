@@ -4,7 +4,7 @@ Created on Feb 16, 2013
 @author: recardon
 '''
 
-class State():
+class State(object):
     """
     Represents a set of conditions that hold in the world.  In this
     representation, a name is sufficient to define a state, however, you may

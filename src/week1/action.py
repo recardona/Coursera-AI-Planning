@@ -4,7 +4,7 @@ Created on Feb 16, 2013
 @author: recardon
 '''
 
-class Action():
+class Action(object):
     """
     Represents things an agent can do to change the state of the world.  In
     this representation, a name is the only thing that defines an action.
