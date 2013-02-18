@@ -3,8 +3,9 @@ Created on Feb 17, 2013
 
 @author: recardona
 '''
+from sets import Set
 
-class SuccessorFunction():
+class SuccessorFunction(object):
     '''
     A Successor Function is a function that returns all Actions that are
     applicable in a given State.  Each Action is tied to a State that results
@@ -68,5 +69,26 @@ class SuccessorFunction():
             self.mapping[state] = existing_mappings
         
         return self
+    
+    def getApplicableActionsInState(self, state):
+        """
+        Returns the Set of Actions (only) that are applicable in the parameter
+        State. If none are applicable as defined by the function, returns None.
+        """
+        if not self.mapping.has_key(state):
+            return None
+        
+        else:
+            applicable_actions = set()
+            existing_mappings  = self.mapping[state] #set of (action, resulting_state) pairs
+            for action_state_pair in existing_mappings:
+                applicable_actions.update({action_state_pair[0]}) #extract the action
+            
+            return applicable_actions
+            
+        pass
+            
+    
+    
     
     

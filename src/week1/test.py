@@ -8,6 +8,7 @@ from state import State
 from action import Action
 from successor import SuccessorFunction
 
+
 class Test(unittest.TestCase):
 
     def setUp(self):
@@ -17,10 +18,11 @@ class Test(unittest.TestCase):
         self.fourthState = State("Fourth")
         self.firstAction = Action("<Action One>")
         self.secondAction = Action("<Action Two>")
+        self.thirdAction  = Action("<Action Three>")
         
         self.successorFunction = SuccessorFunction()
-        self.successorFunction.addMapping(self.firstState, self.firstAction, self.secondState)
-        self.successorFunction.addMapping(self.firstState, self.secondAction, self.thirdState)
+        self.successorFunction.addMapping(self.firstState, self.firstAction, self.firstState)
+        self.successorFunction.addMapping(self.firstState, self.secondAction, self.secondState)
         pass
 
     def tearDown(self):
@@ -69,13 +71,20 @@ class Test(unittest.TestCase):
         
                 
     def testGettingApplicableActionsForStates(self):
-        pass
+        applicable_actions = self.successorFunction.getApplicableActionsInState(self.firstState)
+        self.assertTrue(type(applicable_actions)==type(set()), "The returned value should be a Set")
         
+        for action in applicable_actions:
+            print(type(action))
+            self.assertTrue(type(action)==Action, "Each element of the Set should be an Action")
+        
+        self.assertIn(self.firstAction, applicable_actions, "<Action One> should be in the returned Set")
+        self.assertNotIn(self.thirdAction, applicable_actions, "<Action Three> should not be in the returned Set")        
     
         
         
 
 
 if __name__ == "__main__":
-    #import sys;sys.argv = ['', 'Test.testStateNameEquality', 'Test.testStateConditionsEquality', 'Test.testSuccessorFunctionDefinition']
+    #import sys;sys.argv = ['', 'Test.testStateNameEquality', 'Test.testStateConditionsEquality', 'Test.testSuccessorFunctionDefinition', 'Test.testGettingApplicableActionsForStates']
     unittest.main()
