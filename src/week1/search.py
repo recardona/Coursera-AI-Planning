@@ -23,7 +23,14 @@ class SearchProblem():
     function.
     """
     
-    def __init__(self):
+    def __init__(self, init_state, successor_function, goal_state, path_cost_function):
+        self.initState = init_state
+        self.successorFunction = successor_function
+        self.goalState = goal_state
+        self.pathCostFunction  = path_cost_function
         pass
+    
+    def __str__(self):
+        "Problem: Get from State {} to State {}".format(self.initState, self.goalState)
     
     
