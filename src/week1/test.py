@@ -7,6 +7,8 @@ import unittest
 from state import State
 from action import Action
 from successor import SuccessorFunction
+from search import SearchNode
+from search import SearchProblem
 
 
 class Test(unittest.TestCase):
@@ -23,6 +25,9 @@ class Test(unittest.TestCase):
         self.successorFunction = SuccessorFunction()
         self.successorFunction.addMapping(self.firstState, self.firstAction, self.firstState)
         self.successorFunction.addMapping(self.firstState, self.secondAction, self.secondState)
+        
+        self.searchProblem = SearchProblem(self.firstState, self.successorFunction, self.secondState)
+        
 
     def tearDown(self):
         pass
@@ -56,7 +61,7 @@ class Test(unittest.TestCase):
 #        print("This is a duplicate of the first mapping in a Successor Function and should not be reflected at all.\n")
         simpleFunction.addMapping(self.firstState, self.firstAction, self.secondState)
         simpleFunctionDupString = str(simpleFunction)
-        print(simpleFunctionDupString)
+#        print(simpleFunctionDupString)
         self.assertEqual(simpleFunctionString, simpleFunctionDupString, "Duplicate mappings in a Successor Function should not be reflected at all.")
                 
 #        print("--------------------------------------------\n")
@@ -86,7 +91,14 @@ class Test(unittest.TestCase):
         self.assertIsNone(self.successorFunction.resolveActionInState(self.thirdState, self.firstAction), "If State is not mapped, resulting State is None")
         self.assertIsNone(self.successorFunction.resolveActionInState(self.firstState, self.thirdAction), "If State is not mapped to given Action, resulting State is None")
         
+    def testGoalTest(self):
+        secondStateNode = SearchNode(self.secondState)
+        self.assertTrue(self.searchProblem.goalTest(secondStateNode), "The SearchNode for the second State is the goal of this toy Search Problem")
+        self.assertFalse(self.searchProblem.goalTest(self.secondState), "The Second State should be the goal of this toy Search Problem, but we're passing in a State, not a Node")
+        self.assertFalse(self.searchProblem.goalTest(self.firstState), "The First State should not be the goal of this toy Search Problem")
+        self.assertFalse(self.searchProblem.goalTest(1), "A number is not a State!  This should be False")
         
+
             
     
         
@@ -94,5 +106,5 @@ class Test(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    #import sys;sys.argv = ['', 'Test.testStateNameEquality', 'Test.testStateConditionsEquality', 'Test.testSuccessorFunctionDefinition', 'Test.testGettingApplicableActionsForStates', 'Test.testResolveActionInState']
+    #import sys;sys.argv = ['', 'Test.testStateNameEquality', 'Test.testStateConditionsEquality', 'Test.testSuccessorFunctionDefinition', 'Test.testGettingApplicableActionsForStates', 'Test.testResolveActionInState', 'Test.testGoalTest']
     unittest.main()

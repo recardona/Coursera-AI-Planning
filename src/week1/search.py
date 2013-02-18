@@ -4,7 +4,7 @@ Created on Feb 16, 2013
 @author: recardon
 '''
 
-class SearchNode():
+class SearchNode(object):
     """
     A Search Node is a data structure that we manipulate during the search
     process.  Search nodes are nodes in the search tree.  It is characterized
@@ -39,7 +39,7 @@ class SearchNode():
                 self.path_cost == 0 and self.depth == 0)
 
 
-class SearchProblem():
+class SearchProblem(object):
     """
     A Search Problem is characterized by an initial state, a set of possible
     actions and applicability conditions, a goal state, and a path cost
@@ -60,6 +60,24 @@ class SearchProblem():
         pass
     
     def __str__(self):
-        "Problem: Get from State {} to State {}".format(self.initState, self.goalState)
+        return "Problem: Get from State {} to State {}".format(self.initState, self.goalState)
+        
+    def goalTest(self, search_node):
+        """
+        Checks whether or not the given SearchNode is the goal.
+        returns True iff it is of type SearchNode and its State is the goal.
+        """
+        if type(search_node) is not SearchNode:
+            return False
+        
+        else:
+            if search_node.state == self.goalState:
+                return True
+            
+            else:
+                return False
+            
+            
+        
     
     
