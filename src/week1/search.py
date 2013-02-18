@@ -1,8 +1,84 @@
+#!/usr/bin/python
 '''
-Created on Feb 16, 2013
+  week1.search.py
+  @author: recardona
+'''
 
-@author: recardon
-'''
+def tree_search(search_problem, strategy=None):
+    """
+    A General Tree Search Algorithm.
+    
+    This algorithm has several subtleties: 
+        - it does not terminate with graphs.  This algorithm focuses solely Trees.
+        
+        - the algorithm's performance depends on the choice of Strategy.
+        Caution:  Strategies have not been implemented yet!
+    """
+    if type(search_problem) is not SearchProblem:
+        raise TypeError("search_problem is not of type SearchProblem.")
+    
+    else:
+        fringe = set()
+        searchRoot = SearchNode(search_problem.initState)
+        fringe.add(searchRoot)
+        while 1:
+            if len(fringe) == 0:
+                return None #FAIL - there is no solution to this search problem
+             
+            else:
+                node = fringe.pop() #return an arbitrary node for now
+                
+                if strategy is not None:
+                    node = strategy.selectNode(fringe)
+                
+                if search_problem.goalTest(node):
+                    return path_to(node)
+                
+                else:
+                    fringe.add(expand(search_problem, node))
+
+def path_to(node):
+    """
+    Returns a List of SearchNodes starting at the root of this SearchNode's
+    tree.  The List is a path from the root, through the children, to the given
+    node.
+    """
+    if not type(node) is SearchNode:
+        raise TypeError("node is not of type SearchNode")
+    
+    else:
+        _iter = node
+        path = [_iter]
+        while not iter.isRoot():
+            path.append(_iter.parent_node)
+            _iter = _iter.parent_node
+        
+        path.append(_iter) #Add the root node
+        path.reverse()
+        return path
+
+def expand(search_problem, node):
+    """
+    Expands the node by verifying which Actions are applicable in the given
+    node's State, and then applying those Actions to obtain the resulting
+    States.  Resulting States are then compiled and returned in a List.
+    """
+    if not type(search_problem) is SearchProblem:
+        raise TypeError("search_problem is not of type SearchProblem.")
+    
+    if not type(node) is SearchNode:
+        raise TypeError("node is not of type SearchNode")
+    
+    else:
+        successorFn = search_problem.successorFunction
+        applicable_actions = successorFn.getApplicableActionsInState(node.state)
+        
+        resulting_states = []
+        for action in applicable_actions:
+            resulting_state = successorFn.resolveActionInState(node.state, action)
+            resulting_states.append(resulting_state)
+        
+        return resulting_states
 
 class SearchNode(object):
     """
