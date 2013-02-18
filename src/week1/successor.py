@@ -40,7 +40,11 @@ class SuccessorFunction():
         Adds the mapping state -> (action, resulting_state) to this function.
         
         A Successor Function is a multivalued function; states can be mapped to
-        multiple (action, resulting_state) pairs.
+        multiple (action, resulting_state) pairs.  
+        
+        However, states may not be mapped to the same action with different
+        resulting states; the Successor Function will replace the mapping if
+        such a mapping attempt is made.
         
         Returns self for method chaining.
         """
@@ -50,8 +54,19 @@ class SuccessorFunction():
         else:
             existing_mappings = self.mapping[state]
             new_mapping = {(action, resulting_state)}
+            resulting_state_to_delete = None
+            
+            for mapping in existing_mappings:
+                if mapping[0] == action: #you're trying to add an action with a different resulting_state
+                    resulting_state_to_delete = mapping[1] #note the old resulting_state for deletion
+                
+
+            if resulting_state_to_delete is not None:
+                existing_mappings.remove((action, resulting_state_to_delete)) #delete old resulting_state
+            
             existing_mappings.update(new_mapping)
             self.mapping[state] = existing_mappings
         
         return self
+    
     
