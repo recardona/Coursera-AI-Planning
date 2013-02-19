@@ -10,7 +10,7 @@ from successor import SuccessorFunction
 from search import SearchNode
 from search import SearchProblem
 from search import path_to
-
+from search import expand
 
 class Test(unittest.TestCase):
 
@@ -25,6 +25,7 @@ class Test(unittest.TestCase):
         self.firstAction  = Action("<Action One>")
         self.secondAction = Action("<Action Two>")
         self.thirdAction  = Action("<Action Three>")
+        self.fourthAction = Action("<Action Four>")
         
         self.successorFunction = SuccessorFunction()
         self.successorFunction.addMapping(self.firstState, self.firstAction,\
@@ -32,6 +33,9 @@ class Test(unittest.TestCase):
         
         self.successorFunction.addMapping(self.firstState, self.secondAction,\
                                           self.secondState)
+        
+        self.successorFunction.addMapping(self.firstState, self.thirdAction,\
+                                          self.firstState)
         
         self.searchProblem = SearchProblem(self.firstState,\
                                            self.successorFunction,\
@@ -105,8 +109,8 @@ class Test(unittest.TestCase):
         
         self.assertIn(self.firstAction, applicable_actions, \
                       "<Action One> should be in the returned Set")
-        self.assertNotIn(self.thirdAction, applicable_actions, \
-                         "<Action Three> should not be in the returned Set")
+        self.assertNotIn(self.fourthAction, applicable_actions, \
+                         "<Action Four> should not be in the returned Set")
         
     def testResolveActionInState(self):
         resulting_state = \
@@ -123,7 +127,7 @@ class Test(unittest.TestCase):
                           "If State is not mapped, resulting State is None")
         
         self.assertIsNone(self.successorFunction.resolveActionInState(self.firstState, \
-                                                                      self.thirdAction), \
+                                                                      self.fourthAction), \
                           "If State is not mapped to given Action, resulting State is None")
         
     def testGoalTest(self):
@@ -148,7 +152,18 @@ class Test(unittest.TestCase):
         true_path = [root, child, grandchild]
         test_path = path_to(grandchild)
         
-        self.assertEqual(test_path, true_path, "Test and True Paths should be equal")        
+        self.assertEqual(test_path, true_path, "Test and True Paths should be equal")
+        
+    def testExpand(self):
+        #the expand function can actually have repeated states, so this is normal.
+        true_expanded_nodes = [self.firstState,self.secondState,self.firstState]
+        test_expanded_nodes = expand(self.searchProblem, SearchNode(self.firstState))
+        
+        self.assertItemsEqual(test_expanded_nodes, true_expanded_nodes, "Test and True Expansions should be the same")
+        
+        
+        
+        
     
 
             
