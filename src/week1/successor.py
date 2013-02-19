@@ -56,11 +56,10 @@ class SuccessorFunction(object):
             new_mapping = {(action, resulting_state)}
             resulting_state_to_delete = None
             
-            for mapping in existing_mappings:
-                if mapping[0] == action: #you're trying to add an action with a different resulting_state
-                    resulting_state_to_delete = mapping[1] #note the old resulting_state for deletion
-                
-
+            for mapped_action, resulting_state in existing_mappings:
+                if mapped_action == action:  #you're trying to add an action with a different resulting_state
+                    resulting_state_to_delete = resulting_state  #note the old resulting_state for deletion
+            
             if resulting_state_to_delete is not None:
                 existing_mappings.remove((action, resulting_state_to_delete)) #delete old resulting_state
             
