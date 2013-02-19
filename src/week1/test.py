@@ -9,16 +9,20 @@ from action import Action
 from successor import SuccessorFunction
 from search import SearchNode
 from search import SearchProblem
+from search import path_to
 
 
 class Test(unittest.TestCase):
 
     def setUp(self):
-        self.firstState  = State("First")
-        self.secondState = State("Second")
-        self.thirdState  = State("Third")
-        self.fourthState = State("Fourth")
-        self.firstAction = Action("<Action One>")
+        self.firstState   = State("First")
+        self.secondState  = State("Second")
+        self.thirdState   = State("Third")
+        self.fourthState  = State("Fourth")
+        self.fifthState   = State("Fifth")
+        self.sixthState   = State("Sixth")
+        self.seventhState = State("Seventh")
+        self.firstAction  = Action("<Action One>")
         self.secondAction = Action("<Action Two>")
         self.thirdAction  = Action("<Action Three>")
         
@@ -83,7 +87,7 @@ class Test(unittest.TestCase):
 #        print("Adding this mapping should replace the original mapping.\n")
         simpleFunction.addMapping(self.firstState, self.firstAction, self.thirdState)
         simpleFunctionReplaceString = str(simpleFunction)
-        print(simpleFunctionReplaceString)
+        #print(simpleFunctionReplaceString)
         self.assertNotEqual(simpleFunctionString, simpleFunctionReplaceString, \
                             "Mapping one State to one Action with multiple \
                             resulting States keeps only the last-most State.")
@@ -96,7 +100,6 @@ class Test(unittest.TestCase):
                         "The returned value should be a Set")
         
         for action in applicable_actions:
-            print(type(action))
             self.assertTrue(type(action)==Action, \
                              "Each element of the Set should be an Action")
         
@@ -136,14 +139,19 @@ class Test(unittest.TestCase):
                          "The First State should not be the goal of this toy Search Problem")
         
         self.assertFalse(self.searchProblem.goalTest(1), "A number is not a State!  This should be False")
+    
+    def testPathTo(self):
+        root  = SearchNode(self.firstState)
+        child = SearchNode(self.secondState, root)
+        grandchild = SearchNode(self.thirdState, child)
         
+        true_path = [root, child, grandchild]
+        test_path = path_to(grandchild)
+        
+        self.assertEqual(test_path, true_path, "Test and True Paths should be equal")        
+    
 
             
-    
-        
-        
-
-
 if __name__ == "__main__":
-    #import sys;sys.argv = ['', 'Test.testStateNameEquality', 'Test.testStateConditionsEquality', 'Test.testSuccessorFunctionDefinition', 'Test.testGettingApplicableActionsForStates', 'Test.testResolveActionInState', 'Test.testGoalTest']
+    #import sys;sys.argv = ['', 'Test.testStateNameEquality', 'Test.testStateConditionsEquality', 'Test.testSuccessorFunctionDefinition', 'Test.testGettingApplicableActionsForStates', 'Test.testResolveActionInState', 'Test.testGoalTest', 'Test.testPathTo']
     unittest.main()

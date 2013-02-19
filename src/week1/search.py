@@ -49,11 +49,10 @@ def path_to(node):
     else:
         _iter = node
         path = [_iter]
-        while not iter.isRoot():
+        while not _iter.isRoot():
             path.append(_iter.parent_node)
             _iter = _iter.parent_node
         
-        path.append(_iter) #Add the root node
         path.reverse()
         return path
 
@@ -102,13 +101,18 @@ class SearchNode(object):
 
     def __str__(self):
         if self.isRoot():
-            return "Root SearchNode for State: {0}".format(self.state)
+            return "Root SearchNode for State:\t{0}\n".format(self.state)
         
         else:
-            return "SearchNode for State: {0}, with parent {1} through Action \
-            {2}\n\tPath Cost: {3}\t\tDepth:{4}".format(self.state, \
-                                                       self.parent_node.state, \
-                                                       self.path_cost, self.depth)
+            
+            return "SearchNode for State:\t\t{0}, with parent {1} \
+            \n \t\t\t\t through Action {2} \
+            \n \t\t\t\t Path Cost: {3} \
+            \n \t\t\t\t Depth:{4}\n".format(self.state, \
+                                        self.parent_node.state, \
+                                        self.action, \
+                                        self.path_cost, \
+                                        self.depth)
     
     def isRoot(self):
         return (self.parent_node == None and self.action == None and \
@@ -136,7 +140,7 @@ class SearchProblem(object):
         pass
     
     def __str__(self):
-        return "Problem: Get from State {} to State {}".format(self.initState, self.goalState)
+        return "Problem: Get from State {0} to State {1}".format(self.initState, self.goalState)
         
     def goalTest(self, search_node):
         """
