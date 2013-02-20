@@ -3,6 +3,7 @@
   week1.test.py
   @author: recardona
 '''
+
 import unittest
 from state import State
 from action import Action
@@ -155,9 +156,15 @@ class Test(unittest.TestCase):
         self.assertEqual(test_path, true_path, "Test and True Paths should be equal")
         
     def testExpand(self):
-        #the expand function can actually have repeated states, so this is normal.
-        true_expanded_nodes = [self.firstState,self.secondState,self.firstState]
+        #the expand function can actually have repeated nodes, so this is normal.
+        true_expanded_nodes = [SearchNode(self.firstState),SearchNode(self.secondState),SearchNode(self.firstState)]
         test_expanded_nodes = expand(self.searchProblem, SearchNode(self.firstState))
+        
+        for item in true_expanded_nodes:
+            print(item)
+            
+        for item in test_expanded_nodes:
+            print(item)
         
         self.assertItemsEqual(test_expanded_nodes, true_expanded_nodes, "Test and True Expansions should be the same")
         
