@@ -8,7 +8,7 @@ Week 1 Problems:
 On one bank of a river are three missionaries (black triangles) and three cannibals (red circles). 
 There is one boat available that can hold up to two people and that they would like to use to cross
 the river. If the cannibals ever outnumber the missionaries on either of the river’s banks, the
-missionaries will get eaten.
+missionaries will get eaten.  For the boat to move, it must always have at least one person inside.
 
 How can the boat be used to safely carry all the missionaries and cannibals across the river?
 
