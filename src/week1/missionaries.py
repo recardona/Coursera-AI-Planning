@@ -68,6 +68,9 @@ def main():
     successor_fn.addMapping(two_cannibals_over_without_boat, move_two_missionaries, two_and_two_over)
     successor_fn.addMapping(two_cannibals_over_without_boat, move_one_cannibal, three_cannibals_over)
     
+    #Beginning in (two_and_two_over)
+    successor_fn.addMapping(two_and_two_over, )
+    
     
     
     
