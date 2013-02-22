@@ -77,7 +77,7 @@ def expand(search_problem, node):
         resulting_state_nodes = []
         for action in applicable_actions:
             resulting_state = successorFn.resolveActionInState(node.state, action)
-            resulting_state_cost = 0
+            resulting_state_cost = search_problem.pathCostFunction(node)
             resulting_node \
             = SearchNode(resulting_state, node, action, resulting_state_cost, node.depth+1)
             
