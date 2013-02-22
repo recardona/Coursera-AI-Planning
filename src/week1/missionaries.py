@@ -13,14 +13,14 @@ from successor import SuccessorFunction
 
 def main():
     
-    move_one_missionary   = Action("1m")
-    move_two_missionaries = Action("2m")
-    move_one_cannibal     = Action("1c")
-    move_two_cannibals    = Action("2c")
-    move_one_and_one      = Action("1m1c") 
+    move_one_missionary   = Action("Move One Missionary")
+    move_two_missionaries = Action("Move Two Missionaries")
+    move_one_cannibal     = Action("Move One Cannibal")
+    move_two_cannibals    = Action("Move Two Cannibals")
+    move_one_and_one      = Action("Move One Missionary + One Cannibal") 
     
-    initial_state = State("init", {'L':{'3m','3c','b'}, 'R':{'0m','0c'}})
-    goal_state = State("goal", {'L':{'0m','0c'}, 'R':{'3m','3c','b'}})
+    initial_state = State("Init", {'L':{'3m','3c','b'}, 'R':{'0m','0c'}})
+    goal_state = State("Goal", {'L':{'0m','0c'}, 'R':{'3m','3c','b'}})
     
     # Any state where cannibals outnumber missionaries is not a valid state
     one_and_one_over = State("1m1c Over", {'L':{'2m','2c'}, 'R':{'1m','1c','b'}})
@@ -118,20 +118,22 @@ def main():
     print(missionaries_and_cannibals)
     print("\nSolution: \n")
     for plan_step in plan:
+        if plan_step.action is None:
+            print ("<start>")
+        
+        else:
+            print ("\t"),
+            print (plan_step.action)
+    
+    print("<end>")
+    
+   
+    print("\nExpanded Nodes: \n")
+    for plan_step in plan:
         print(plan_step)
         
     
     
-    
-    
-    
-    
-    
-                            
-    
-    
-    
-    pass
 
 if __name__ == '__main__':
     main()

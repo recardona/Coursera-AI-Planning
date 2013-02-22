@@ -78,9 +78,7 @@ def expand(search_problem, node):
         for action in applicable_actions:
             resulting_state = successorFn.resolveActionInState(node.state, action)
             resulting_state_cost = search_problem.pathCostFunction(node)
-            resulting_node \
-            = SearchNode(resulting_state, node, action, resulting_state_cost, node.depth+1)
-            
+            resulting_node = SearchNode(resulting_state, node, action, resulting_state_cost, node.depth+1)
             resulting_state_nodes.append(resulting_node)
         
         return resulting_state_nodes
@@ -112,7 +110,7 @@ class SearchNode(object):
         else:
             
             return "SearchNode for State:\t\t{0}\
-            \n \t\t\t\t through {1} \
+            \n \t\t\t\t through: {1} \
             \n \t\t\t\t Path Cost: {2} \
             \n \t\t\t\t Depth:{3}\n".format(self.state, \
                                         self.action, \
@@ -145,7 +143,7 @@ class SearchProblem(object):
         pass
     
     def __str__(self):
-        return "Problem:\n\tGet from State {0}\n\t to State {1}".format(self.initState, self.goalState)
+        return "Problem:\n\tGet from {0}\n\t to {1}".format(self.initState, self.goalState)
         
     def goalTest(self, search_node):
         """
