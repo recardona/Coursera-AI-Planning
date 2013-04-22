@@ -160,9 +160,11 @@ class Test(unittest.TestCase):
         true_expanded_nodes = [SearchNode(self.firstState),SearchNode(self.secondState),SearchNode(self.firstState)]
         test_expanded_nodes = expand(self.searchProblem, SearchNode(self.firstState))
         
+        print("True Expanded:")
         for item in true_expanded_nodes:
             print(item)
             
+        print("Test Expanded:")
         for item in test_expanded_nodes:
             print(item)
         

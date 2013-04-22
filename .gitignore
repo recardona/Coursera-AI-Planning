@@ -1,0 +1,8 @@
+.pydevproject
+.pyc
+src/week1/__init__.pyc
+src/week1/action.pyc
+src/week1/search.pyc
+src/week1/state.pyc
+src/week1/successor.pyc
+src/week1/test.pyc
