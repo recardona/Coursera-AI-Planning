@@ -1,7 +1,15 @@
 Week 1
 ====================
+--------
+###Week 1 Documents:
+The topics for this week were fairly light.  Topics include: an introduction to planning, and
+an informal overview of the planning problem, as well as a brief overview of planning's relation
+to search, as well as how to define search problems via the use of tree structures (general graph
+structures are discussed in less detail).
 
-Week 1 Problems:
+
+--------
+###Week 1 Problems:
 
 * Missionaries and Cannibals Search Problem
 
