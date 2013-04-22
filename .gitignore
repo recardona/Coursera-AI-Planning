@@ -6,3 +6,7 @@ src/week1/search.pyc
 src/week1/state.pyc
 src/week1/successor.pyc
 src/week1/test.pyc
+week1/src/action.pyc
+week1/src/search.pyc
+week1/src/state.pyc
+week1/src/successor.pyc

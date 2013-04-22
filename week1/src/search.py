@@ -92,7 +92,7 @@ class SearchNode(object):
     and the depth of this node in the search tree.
     """
     
-    def __init__(self, state, parent_node=None, action=None, path_cost=0, depth=0):
+    def __init__(self, state, parent_node=None, action=None, pathCost=0, depth=0):
         """
         Initializes a SearchNode with the given parameters.  Default parameters
         are for when the node is the root node of the search tree.
@@ -100,8 +100,39 @@ class SearchNode(object):
         self.state = state
         self.parentNode = parent_node 
         self.action = action
-        self.pathCost = path_cost
-        self.depth = depth 
+        self.pathCost = pathCost
+        self.depth = depth
+        
+    def __eq__(self,other):
+        """
+        Node equality must have equality in the states, parents, actions, path_cost, and depth
+        """
+        if(not isinstance(other, SearchNode)):
+            print("False")
+        
+        if(self.state != other.state):
+            print("False")
+        
+        if(self.parentNode != other.parentNode):
+            print("False")
+        
+        if(self.action != other.action):
+            print("False")
+        
+        if(self.pathCost != other.pathCost):
+            print("False")
+        
+        if(self.depth != other.depth):
+            print("False")
+        
+        return True
+    
+    def __ne__(self, other):
+        """
+        Node inequality must have inequality in the states, parents, actions, path_cost, and depth
+        """
+        return not self.__eq__(other)
+        
 
     def __str__(self):
         if self.isRoot():
@@ -118,8 +149,13 @@ class SearchNode(object):
                                         self.depth)
     
     def isRoot(self):
-        return (self.parentNode == None and self.action == None and \
-                self.pathCost == 0 and self.depth == 0)
+        # Note: the preferred way for checking against None is with the 'is'
+        # statement; All null objects are really pointers to the same value,
+        # which python sets aside to mean "None". This was causing a problem
+        # in the __eq__(self,other) method, because of the check
+        # if(self.parentNode != other.parentNode).
+        return (self.parentNode is None and self.action is None \
+                and self.pathCost == 0 and self.depth == 0)
 
 
 class SearchProblem(object):

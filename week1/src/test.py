@@ -157,19 +157,19 @@ class Test(unittest.TestCase):
         
     def testExpand(self):
         #the expand function can actually have repeated nodes, so this is normal.
-        true_expanded_nodes = [SearchNode(self.firstState),SearchNode(self.secondState),SearchNode(self.firstState)]
+        true_expanded_nodes = [SearchNode(self.firstState,SearchNode(self.firstState),self.firstAction,0,1),
+                               SearchNode(self.firstState,SearchNode(self.firstState),self.thirdAction,0,1),
+                               SearchNode(self.secondState,SearchNode(self.firstState),self.secondAction,0,1)
+                               ]
         test_expanded_nodes = expand(self.searchProblem, SearchNode(self.firstState))
         
-        print("True Expanded:")
-        for item in true_expanded_nodes:
-            print(item)
-            
-        print("Test Expanded:")
-        for item in test_expanded_nodes:
-            print(item)
+    
+        self.assertEqual(len(test_expanded_nodes), 3, "There should be three nodes in the Test Expansion")
+        self.assertEqual(test_expanded_nodes[0], true_expanded_nodes[0], "Test and True Expansions should be the same")
+        self.assertEqual(test_expanded_nodes[1], true_expanded_nodes[1], "Test and True Expansions should be the same")
+        self.assertEqual(test_expanded_nodes[2], true_expanded_nodes[2], "Test and True Expansions should be the same")
         
-        self.assertItemsEqual(test_expanded_nodes, true_expanded_nodes, "Test and True Expansions should be the same")
-        
+    
         
         
         
